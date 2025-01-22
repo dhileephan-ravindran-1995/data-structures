@@ -1,0 +1,47 @@
+def heapify_recursive(arr,n,parent):  # n is length of array not last index
+    #if(parent > (n//2)-1): # if parent passed reached leaf node then Break
+    #    return None
+    largest = parent
+    lc = 2*parent +1 # left child of i 
+    rc = 2*parent +2 # right child of i
+    
+    if(lc < n) and (arr[lc] > arr[largest]) :  # lc < n  needs to be checked to avoid  array out of Bound 
+        largest = lc
+    if(rc < n) and (arr[rc] > arr[largest]) :  # lc < n  needs to be checked to avoid  array out of Bound 
+        largest = rc
+    
+    if( largest != parent):
+        arr[parent], arr[largest] = arr[largest],arr[parent]
+        heapify_recursive(arr,n,largest)
+
+def heap_sort(arr):
+    n = len(arr)
+    i = (n//2)-1 # last non leaf node
+    # start heapify from non Leaf node till 0 index
+    while (i >=0):
+        heapify_recursive(arr,n,i)
+        i=i-1
+    print("max Heap achieved array")
+    print(arr)
+    
+    j = n-1  # last index
+    while( j >= 1):
+        arr[j],arr[0] = arr[0],arr[j]
+       
+        print("placed max largest at last index")
+        print(arr)
+        heapify_recursive(arr,j,0) # here j is length of current array not last index
+        print("max Heap achieved array")
+        print(arr)
+        j=j-1
+    
+if __name__ == "__main__":
+    lst = [7,2,8,3,9,6,1,0,5,4]
+    print("Unsorted Array")
+    print(lst)
+    print("***********************************")
+    heap_sort(lst)
+    print("***********************************")
+    print("Heap sorted Array Recursive Approach")
+    print(lst)
+    
