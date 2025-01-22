@@ -1,0 +1,40 @@
+def merge(inLeft,inRight):
+    result = []
+    while inLeft and inRight:
+        if(inLeft[0] <= inRight[0]):
+            result.append(inLeft.pop(0))
+        else:
+            result.append(inRight.pop(0))
+    result.extend(inLeft)
+    result.extend(inRight)
+    
+    return result
+
+def split(eachLst):
+    mid = len(eachLst)//2
+    leftLst = eachLst[:mid]
+    rightLst = eachLst[mid:]
+    return leftLst, rightLst
+
+def merge_sort(inLst):
+    if (len(inLst) <=1):
+        return inLst
+    
+    left, right = split(inLst)
+    left_sorted = merge_sort(left)
+    right_sorted = merge_sort(right)
+    
+    return merge(left_sorted,right_sorted)
+
+def main():
+    List = [7,10,4,2,1,9,7,0,1,8,3,5]
+    print("unsorted List")
+    print(List)
+    sorted_arry = merge_sort(List)
+
+    print("Merge sorted List")
+    print(sorted_arry)
+
+if __name__ == "__main__":
+    main()
+    

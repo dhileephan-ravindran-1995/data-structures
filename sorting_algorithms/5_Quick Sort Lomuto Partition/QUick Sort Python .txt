@@ -1,0 +1,51 @@
+def swap(lst,a, b):
+    lst[a], lst[b] = lst[b], lst[a] 
+    return None
+def pivot_switching(lst,SIdx,EIdx):
+    #print("pivotSwitching called: ")
+    #print(lst)
+    #print("SIdx=" + str(SIdx))
+    #print("EIdx=" + str(EIdx))
+    pvtIdx= EIdx
+    i = SIdx 
+    j = SIdx 
+    while (j < EIdx):
+        if( lst[j] < lst[pvtIdx]):
+            #print(" true lst[j] < lst[pvtIdx]")
+            swap(lst,i,j)
+            i=i+1
+            j=j+1
+        else:
+            #print(" false lst[j] < lst[pvtIdx]")
+            j=j+1
+        #print(lst)
+    #print("i=" + str(i))   
+    #print("j=" + str(j))  
+    swap(lst,i,pvtIdx)
+    return i
+    
+def quick_sort(lst,SIdx,EIdx):
+    
+    if(len(lst) <= 1):
+        return None 
+    i = pivot_switching(lst,SIdx,EIdx)
+    print("pivoted List:")
+    print(lst)
+    if(i!=SIdx):
+        quick_sort(lst,SIdx,i-1)
+    if(i!=EIdx):
+        quick_sort(lst,i+1,EIdx)
+    return None
+
+def main():
+    lst = [7,2,8,3,9,6,1,0,5,4]
+    print("Unsorted Array")
+    print(lst)
+    print("***********************************")
+    quick_sort(lst,0,len(lst)-1)
+    print("***********************************")
+    print("sorted Array")
+    print(lst)
+
+if __name__ == "__main__":
+    main()
